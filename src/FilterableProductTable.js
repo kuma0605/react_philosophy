@@ -3,15 +3,28 @@ import './fpt.css';
 import Sb from './SearchBar';
 import Pt from './ProductTable';
 class FilterableProductTable extends Component {
-  /* constructor(props){
+  constructor(props){
     super(props)
-  } */
+
+    this.state={
+      search:'',
+      stocked:false
+    }
+    this.handleSearchChange=this.handleSearchChange.bind(this);
+  }
+
+  handleSearchChange(newSearch){
+    console.log(newSearch)
+    this.setState(newSearch)
+  }
 
   render(){
+    let productList = this.props.productList;
+    console.log(productList)
     return (
       <div className='fpt'>
-        <Sb></Sb>
-        <Pt productList={this.props.productList}></Pt>
+        <Sb onHandleSearchChange={this.handleSearchChange}></Sb>
+        <Pt productList={productList}></Pt>
       </div>
     )
   }

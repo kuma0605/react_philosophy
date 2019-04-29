@@ -12,7 +12,7 @@ class ProductTable extends Component {
         productList.splice(index, 0, {category, isCategory:true})
       }
     });
-    console.log(productList)
+    
     return (
       <table>
         <thead>
@@ -23,11 +23,11 @@ class ProductTable extends Component {
         </thead>
         <tbody>
           {
-            productList.map((item)=>{
+            productList.map((item, index)=>{
               if(item.isCategory){
-                return <Pcr item={item} key={item.category}></Pcr>
+                return <Pcr item={item} key={index}></Pcr>
               }else {
-                return <PR item={item} key={item.name}></PR>
+                return <PR item={item} key={index}></PR>
               }
             })
           }
