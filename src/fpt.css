@@ -1,3 +1,7 @@
 .fpt{
   padding: 10px 10px;
 }
+
+.fpt .outStocked{
+  color:red;
+}
