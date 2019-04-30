@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-
+import './pr.css';
 class ProductRow extends Component {
   render(){
     let item = this.props.item;
