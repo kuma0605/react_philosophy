@@ -9,37 +9,30 @@ class SearchBar extends Component {
       stocked:false
     }
 
-    this.handleSearchChange=this.handleSearchChange.bind(this);
-    this.handleStockedChange=this.handleStockedChange.bind(this);
+    this.handleInputChange=this.handleInputChange.bind(this);
   }
 
-  handleSearchChange(event){
+  handleInputChange(event){
+    const target = event.target;
+    const value = target.type==='checkbox'?target.checked:target.value;
+    const name = target.name;
     this.setState({
-      search: event.target.value
+      [name]:value
     })
-    this.props.onHandleSearchChange({
-      search: event.target.value,
-      stocked: this.state.stocked
-    })
-  }
-
-  handleStockedChange(event){
-    this.setState({
-      stocked: event.target.value
-    })
-    this.props.onHandleSearchChange({
-      search: this.state.search,
-      stocked: event.target.value
-    })
+    // state更新可能是异步的，即可能还未更新
+    // 所以需要在调用父组件函数前，加个setTimeout
+    setTimeout(()=>{
+      this.props.onHandleSearchChange(this.state)
+    },0);
   }
   
   render(){
     return (
       <div className='Sb'>
-        <input type='text' value={this.state.search} onChange={this.handleSearchChange}></input>
+        <input type='text' name='search' value={this.state.search} onChange={this.handleInputChange}></input>
         <br/>
         <label>
-          <input type='checkbox' value={this.state.stocked} onChange={this.handleStockedChange}></input><span>Only show products in stock</span>
+          <input type='checkbox' name='stocked' checked={this.state.stocked} onChange={this.handleInputChange}></input><span>Only show products in stock</span>
         </label>
       </div>
     )

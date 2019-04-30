@@ -4,7 +4,9 @@ import Pcr from './ProductCategoryRow';
 import PR from './ProductRow';
 class ProductTable extends Component {
   render(){
-    let productList = this.props.productList;
+    // 因为要对productList进行处理，所以不能直接引用
+    // 且要遵循props不能被修改原则
+    let productList = [].concat(this.props.productList);
     let category;
     productList.forEach((element, index) => {
       if(!category||category!==element.category){
